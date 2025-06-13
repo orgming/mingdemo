@@ -35,7 +35,7 @@ func NewContext(r *http.Request, w http.ResponseWriter) *Context {
 
 // #region base function
 
-func (ctx *Context) WriteMux() *sync.Mutex {
+func (ctx *Context) WriterMux() *sync.Mutex {
 	return ctx.writeMux
 }
 
