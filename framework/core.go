@@ -83,3 +83,8 @@ func (c *Core) FindRouteByRequest(request *http.Request) ControllerHandler {
 	}
 	return nil
 }
+
+// Group 在core中初始化Group
+func (c *Core) Group(prefix string) IGroup {
+	return NewGroup(c, prefix)
+}
