@@ -11,6 +11,7 @@ func main() {
 
 	core.Use(middleware.Test1(), middleware.Test2())
 	core.Use(middleware.Recovery())
+	core.Use(middleware.Cost())
 
 	registerRouter(core)
 	server := &http.Server{
