@@ -26,7 +26,7 @@ func NewCore() *Core {
 
 // === http method
 
-// 路由注册，将路由注册函数按照 Method 名拆分为 4 个方法：Get、Post、Put 和 Delete。
+// 路由注册，将路由注册函数按照Method名拆分为4个方法：Get、Post、Put 和 Delete。
 // 统一将路由转为大写。
 
 func (c *Core) Get(url string, handler ControllerHandler) {

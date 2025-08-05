@@ -48,7 +48,7 @@ func (n *node) filterChildNodes(segment string) []*node {
 
 	nodes := make([]*node, 0, len(n.childs))
 	// 过滤所有的下一层子节点
-	for _, cnode := range nodes {
+	for _, cnode := range n.childs {
 		if isWildSegment(cnode.segment) {
 			// 如果下一层子节点有通配符，则满足需求
 			nodes = append(nodes, cnode)
@@ -62,7 +62,9 @@ func (n *node) filterChildNodes(segment string) []*node {
 
 // matchNode 判断路由是否已经在节点的所有子节点树中存在了
 func (n *node) matchNode(uri string) *node {
+	// 使用分隔符将uri切割为两个部分
 	segments := strings.SplitN(uri, "/", 2)
+	// 第一个部分用于匹配下一层子节点
 	segment := segments[0]
 	if !isWildSegment(segment) {
 		segment = strings.ToUpper(segment)
@@ -120,10 +122,10 @@ func (tree *Tree) AddRouter(uri string, handler ControllerHandler) error {
 		}
 		isLast := idx == len(segments)-1 // TODO
 
-		var objNode *node
+		var objNode *node // 标记是否有合适的子节点
 
 		childNodes := n.filterChildNodes(segment)
-		//
+		// 如果有匹配的子节点
 		if len(childNodes) > 0 {
 			for _, cnode := range childNodes {
 				if cnode.segment == segment {
