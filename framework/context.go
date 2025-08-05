@@ -12,11 +12,13 @@ import (
 	"time"
 )
 
+// Context 代表当前请求上下文
 type Context struct {
 	request        *http.Request
 	responseWriter http.ResponseWriter
 	ctx            context.Context
-	handler        ControllerHandler
+	handlers       []ControllerHandler // 当前请求的handler链条
+	index          int                 // 当前请求调用到调用链的哪个节点
 
 	// 是否超时标记位
 	hasTimeout bool
@@ -30,6 +32,7 @@ func NewContext(r *http.Request, w http.ResponseWriter) *Context {
 		responseWriter: w,
 		ctx:            r.Context(),
 		writeMux:       &sync.Mutex{},
+		index:          -1,
 	}
 }
 
@@ -86,9 +89,9 @@ func (ctx *Context) Value(key any) any {
 func (ctx *Context) Query(key string, def int) int {
 	params := ctx.QueryAll()
 	if vals, ok := params[key]; ok {
-		len := len(vals)
-		if len > 0 {
-			intval, err := strconv.Atoi(vals[len-1])
+		length := len(vals)
+		if length > 0 {
+			intval, err := strconv.Atoi(vals[length-1])
 			if err != nil {
 				return def
 			}
@@ -108,9 +111,9 @@ func (ctx *Context) QueryAll() map[string][]string {
 func (ctx *Context) QueryString(key string, def string) string {
 	params := ctx.QueryAll()
 	if vals, ok := params[key]; ok {
-		len := len(vals)
-		if len > 0 {
-			return vals[len-1]
+		length := len(vals)
+		if length > 0 {
+			return vals[length-1]
 		}
 	}
 	return def
@@ -137,9 +140,9 @@ func (ctx *Context) FormAll() map[string][]string {
 func (ctx *Context) FormInt(key string, def int) int {
 	params := ctx.FormAll()
 	if vals, ok := params[key]; ok {
-		len := len(vals)
-		if len > 0 {
-			intval, err := strconv.Atoi(vals[len-1])
+		length := len(vals)
+		if length > 0 {
+			intval, err := strconv.Atoi(vals[length-1])
 			if err != nil {
 				return def
 			}
@@ -152,9 +155,9 @@ func (ctx *Context) FormInt(key string, def int) int {
 func (ctx *Context) FormString(key string, def string) string {
 	params := ctx.FormAll()
 	if vals, ok := params[key]; ok {
-		len := len(vals)
-		if len > 0 {
-			return vals[len-1]
+		length := len(vals)
+		if length > 0 {
+			return vals[length-1]
 		}
 	}
 	return def
@@ -214,6 +217,21 @@ func (ctx *Context) HTML(status int, obj interface{}, template string) error {
 }
 
 func (ctx *Context) Text(status int, obj string) error {
+	return nil
+}
+
+func (ctx *Context) SetHandlers(handlers []ControllerHandler) {
+	ctx.handlers = handlers
+}
+
+// Next 调用context的下一个函数 【核心函数】
+func (ctx *Context) Next() error {
+	ctx.index++
+	if ctx.index < len(ctx.handlers) {
+		if err := ctx.handlers[ctx.index](ctx); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
