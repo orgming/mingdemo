@@ -1,22 +1,21 @@
-package framework
+package middleware
 
 import (
 	"context"
 	"fmt"
 	"log"
+	"mingdemo/framework"
 	"time"
 )
 
-func TimeoutHandler(fun ControllerHandler, d time.Duration) ControllerHandler {
+func Timeout(d time.Duration) framework.ControllerHandler {
 
-	return func(c *Context) error {
+	return func(c *framework.Context) error {
 		finish := make(chan struct{}, 1)
 		panicChan := make(chan interface{}, 1)
 
 		durationCtx, cancelFunc := context.WithTimeout(c.BaseContext(), d)
 		defer cancelFunc()
-
-		c.request.WithContext(durationCtx)
 
 		go func() {
 			defer func() {
@@ -25,21 +24,22 @@ func TimeoutHandler(fun ControllerHandler, d time.Duration) ControllerHandler {
 				}
 			}()
 			// 执行具体的业务逻辑
-			fun(c)
+			c.Next()
+
 			finish <- struct{}{}
 		}()
 
 		// 业务逻辑后的操作
 		select {
 		case p := <-panicChan:
+			c.Json(500, "time out")
 			log.Println(p)
-			c.responseWriter.WriteHeader(500)
+
 		case <-finish:
 			fmt.Println("finish")
 		case <-durationCtx.Done():
 			c.SetHasTimeout()
-			c.responseWriter.Write([]byte("time out"))
-
+			c.Json(500, "time out")
 		}
 		return nil
 	}
