@@ -3,31 +3,31 @@ package main
 import "mingdemo/framework"
 
 func SubjectAddController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectAddController")
+	c.SetOkStatus().Json("Ok, SubjectAddController")
 	return nil
 }
 
 func SubjectListController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectListController")
+	c.SetOkStatus().Json("Ok, SubjectListController")
 	return nil
 }
 
 func SubjectDeleteController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectDelController")
+	c.SetOkStatus().Json("Ok, SubjectDelController")
 	return nil
 }
 
 func SubjectUpdateController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectUpdateController")
+	c.SetOkStatus().Json("Ok, SubjectUpdateController")
 	return nil
 }
 
 func SubjectGetController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectGetController")
+	c.SetOkStatus().Json("Ok, SubjectGetController")
 	return nil
 }
 
 func SubjectNameController(c *framework.Context) error {
-	c.Json(200, "ok, SubjectNameController")
+	c.SetOkStatus().Json("Ok, SubjectNameController")
 	return nil
 }
