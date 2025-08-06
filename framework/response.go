@@ -2,8 +2,11 @@ package framework
 
 import (
 	"encoding/json"
+	"encoding/xml"
+	"fmt"
 	"html/template"
 	"net/http"
+	"net/url"
 )
 
 // IResponse 代表返回包含的方法
@@ -82,9 +85,14 @@ func (ctx *Context) Json(obj any) IResponse {
 	return nil
 }
 
-func (Context) Xml(obj any) IResponse {
-	//TODO implement me
-	panic("implement me")
+func (ctx *Context) Xml(obj any) IResponse {
+	bytes, err := xml.Marshal(obj)
+	if err != nil {
+		return ctx.SetStatus(http.StatusInternalServerError)
+	}
+	ctx.SetHeader("Content-Type", "application/html")
+	ctx.responseWriter.Write(bytes)
+	return nil
 }
 
 func (ctx *Context) Html(file string, obj any) IResponse {
@@ -102,31 +110,45 @@ func (ctx *Context) Html(file string, obj any) IResponse {
 }
 
 func (ctx *Context) Text(format string, values ...any) IResponse {
-	//TODO implement me
-	panic("implement me")
+	out := fmt.Sprintf(format, values...)
+	ctx.SetHeader("Content-type", "application/text")
+	ctx.responseWriter.Write([]byte(out))
+	return ctx
 }
 
 func (ctx *Context) Redirect(path string) IResponse {
-	//TODO implement me
-	panic("implement me")
+	http.Redirect(ctx.responseWriter, ctx.request, path, http.StatusMovedPermanently)
+	return ctx
 }
 
 func (ctx *Context) SetHeader(key string, val string) IResponse {
-	//TODO implement me
-	panic("implement me")
+	ctx.responseWriter.Header().Set(key, val)
+	return ctx
 }
 
 func (ctx *Context) SetCookie(key string, val string, maxAge int, path, domain string, secure, httpOnly bool) IResponse {
-	//TODO implement me
-	panic("implement me")
+	if path == "" {
+		path = "/"
+	}
+	http.SetCookie(ctx.responseWriter, &http.Cookie{
+		Name:     key,
+		Value:    url.QueryEscape(val),
+		MaxAge:   maxAge,
+		Path:     path,
+		Domain:   domain,
+		Secure:   secure,
+		HttpOnly: httpOnly,
+		SameSite: 1, // TODO
+	})
+	return ctx
 }
 
 func (ctx *Context) SetStatus(code int) IResponse {
-	//TODO implement me
-	panic("implement me")
+	ctx.responseWriter.WriteHeader(code)
+	return ctx
 }
 
 func (ctx *Context) SetOkStatus() IResponse {
-	//TODO implement me
-	panic("implement me")
+	ctx.SetStatus(http.StatusOK)
+	return ctx
 }
