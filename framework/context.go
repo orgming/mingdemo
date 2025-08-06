@@ -2,7 +2,6 @@ package framework
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 	"sync"
 	"time"
@@ -83,31 +82,6 @@ func (ctx *Context) Value(key any) any {
 
 // #endregion
 
-// #region response
-
-func (ctx *Context) Json(status int, obj any) error {
-	if ctx.HasTimeout() {
-		return nil
-	}
-	ctx.responseWriter.Header().Set("Content-Type", "application/json")
-	ctx.responseWriter.WriteHeader(status)
-	byt, err := json.Marshal(obj)
-	if err != nil {
-		ctx.responseWriter.WriteHeader(500)
-		return err
-	}
-	ctx.responseWriter.Write(byt)
-	return nil
-}
-
-func (ctx *Context) HTML(status int, obj interface{}, template string) error {
-	return nil
-}
-
-func (ctx *Context) Text(status int, obj string) error {
-	return nil
-}
-
 func (ctx *Context) SetHandlers(handlers []ControllerHandler) {
 	ctx.handlers = handlers
 }
@@ -122,8 +96,6 @@ func (ctx *Context) Next() error {
 	}
 	return nil
 }
-
-// #endregion
 
 func (ctx *Context) SetParams(params map[string]string) {
 	ctx.params = params
