@@ -17,6 +17,7 @@ type node struct {
 	segment  string              // uri中的字符串，代表这个节点表示的路由中某个段的字符串
 	handlers []ControllerHandler // 中间体 + 控制器
 	childs   []*node             // 代表这个节点下的子节点
+	parent   *node
 }
 
 func newNode() *node {
@@ -24,6 +25,7 @@ func newNode() *node {
 		isLast:  false,
 		segment: "",
 		childs:  []*node{},
+		parent:  nil,
 	}
 }
 
@@ -144,6 +146,8 @@ func (tree *Tree) AddRouter(uri string, handlers []ControllerHandler) error {
 				cnode.isLast = true
 				cnode.handlers = handlers
 			}
+			// 父节点指针修改
+			cnode.parent = n
 			n.childs = append(n.childs, cnode)
 			objNode = cnode
 		}
@@ -159,4 +163,22 @@ func (tree *Tree) FindHandler(uri string) []ControllerHandler {
 		return nil
 	}
 	return matchNode.handlers
+}
+
+// 将uri解析为 params
+func (n *node) parseParamsFromEndNode(uri string) map[string]string {
+	res := map[string]string{}
+	segments := strings.Split(uri, "/")
+	length := len(segments)
+	cur := n
+	for i := length - 1; i >= 0; i-- {
+		if cur.segment == "" {
+			break
+		}
+		if isWildSegment(cur.segment) {
+			res[cur.segment[1:]] = segments[i]
+		}
+		cur = cur.parent
+	}
+	return res
 }

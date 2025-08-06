@@ -70,14 +70,18 @@ func (c *Core) ServeHTTP(response http.ResponseWriter, request *http.Request) {
 	ctx := NewContext(request, response)
 
 	// 寻找路由
-	handlers := c.FindRouteByRequest(request)
-	if handlers == nil {
+	node := c.FindRouteNodeByRequest(request)
+	if node == nil {
 		// 没有找到路由就打印日志
 		ctx.Json(404, "Not Found")
 		return
 	}
 
-	ctx.SetHandlers(handlers)
+	ctx.SetHandlers(node.handlers)
+
+	// 设置路由参数
+	params := node.parseParamsFromEndNode(request.URL.Path)
+	ctx.SetParams(params)
 
 	// 调用路由函数，如果err说明内部错误，返回500
 	if err := ctx.Next(); err != nil {
@@ -86,12 +90,12 @@ func (c *Core) ServeHTTP(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
-// FindRouteByRequest  匹配路由方法
-func (c *Core) FindRouteByRequest(request *http.Request) []ControllerHandler {
+// FindRouteNodeByRequest  匹配路由方法
+func (c *Core) FindRouteNodeByRequest(request *http.Request) *node {
 	uri := strings.ToUpper(request.URL.Path)
 	method := strings.ToUpper(request.Method)
 	if methodHandlers, ok := c.router[method]; ok {
-		return methodHandlers.FindHandler(uri)
+		return methodHandlers.root.matchNode(uri)
 	}
 	return nil
 }
