@@ -1,8 +1,8 @@
 package main
 
 import (
-	"mingdemo/framework"
-	"mingdemo/framework/middleware"
+	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/mingdemo/framework/middleware"
 )
 
 // registerRouter 注册路由规则

@@ -1,6 +1,6 @@
 package middleware
 
-import "mingdemo/framework"
+import "github.com/orgming/mingdemo/framework"
 
 // Recovery recovery机制，将协程中的函数异常进行捕获
 func Recovery() framework.ControllerHandler {

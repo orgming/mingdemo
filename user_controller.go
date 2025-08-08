@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mingdemo/framework"
+	"github.com/orgming/mingdemo/framework"
 	"time"
 )
 

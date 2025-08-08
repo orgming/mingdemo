@@ -1,8 +1,8 @@
 package middleware
 
 import (
+	"github.com/orgming/mingdemo/framework"
 	"log"
-	"mingdemo/framework"
 	"time"
 )
 

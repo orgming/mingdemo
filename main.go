@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/mingdemo/framework/middleware"
 	"log"
-	"mingdemo/framework"
-	"mingdemo/framework/middleware"
 	"net/http"
 	"os"
 	"os/signal"

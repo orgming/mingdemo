@@ -1,6 +1,6 @@
 package main
 
-import "mingdemo/framework"
+import "github.com/orgming/mingdemo/framework"
 
 func SubjectAddController(c *framework.Context) error {
 	c.SetOkStatus().Json("Ok, SubjectAddController")

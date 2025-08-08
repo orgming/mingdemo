@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"fmt"
-	"mingdemo/framework"
+	"github.com/orgming/mingdemo/framework"
 )
 
 func Test1() framework.ControllerHandler {
