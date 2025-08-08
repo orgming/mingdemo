@@ -2,6 +2,7 @@ package framework
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 )
 
@@ -34,6 +35,23 @@ type MingContainer struct {
 	instances map[string]any
 	// lock 用于锁住对容器的变更操作
 	lock sync.RWMutex
+}
+
+func NewContainer() *MingContainer {
+	return &MingContainer{
+		providers: make(map[string]ServiceProvider),
+		instances: make(map[string]any),
+		lock:      sync.RWMutex{},
+	}
+}
+
+// PrintProviders 输出服务容器中注册的关键字
+func (mc *MingContainer) PrintProviders() []string {
+	res := []string{}
+	for _, provider := range mc.providers {
+		res = append(res, fmt.Sprintf(provider.Name()))
+	}
+	return res
 }
 
 func (mc *MingContainer) Bind(provider ServiceProvider) error {
