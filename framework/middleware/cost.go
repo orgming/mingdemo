@@ -1,20 +1,19 @@
 package middleware
 
 import (
-	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/mingdemo/framework/gin"
 	"log"
 	"time"
 )
 
 // Cost 请求时长统计
-func Cost() framework.ControllerHandler {
-	return func(c *framework.Context) error {
+func Cost() gin.HandlerFunc {
+	return func(c *gin.Context) {
 		start := time.Now()
+		log.Printf("api uri start: %v", c.Request.RequestURI)
 		c.Next()
 		end := time.Now()
 		cost := end.Sub(start)
-
-		log.Printf("api uri: %v, cost: %v", c.GetRequest().RequestURI, cost.Seconds())
-		return nil
+		log.Printf("api uri: %v, cost: %v", c.Request.RequestURI, cost.Seconds())
 	}
 }

@@ -5,8 +5,13 @@
 package gin
 
 import (
+	"context"
 	"github.com/orgming/mingdemo/framework"
 )
+
+func (c *Context) BaseContext() context.Context {
+	return c.Request.Context()
+}
 
 // engine 实现 container 的绑定封装
 
