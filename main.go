@@ -6,8 +6,9 @@ package main
 
 import (
 	"context"
-	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/mingdemo/framework/gin"
 	"github.com/orgming/mingdemo/framework/middleware"
+	"github.com/orgming/mingdemo/provider/demo"
 	"log"
 	"net/http"
 	"os"
@@ -16,10 +17,12 @@ import (
 )
 
 func main() {
-	core := framework.NewCore()
+	// 创建engine结构
+	core := gin.New()
+	// 绑定具体的服务
+	core.Bind(&demo.DemoServiceProvider{})
 
-	//core.Use(middleware.Test1(), middleware.Test2())
-	core.Use(middleware.Recovery())
+	core.Use(gin.Recovery())
 	core.Use(middleware.Cost())
 
 	registerRouter(core)

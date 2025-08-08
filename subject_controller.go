@@ -1,33 +1,38 @@
 package main
 
-import "github.com/orgming/mingdemo/framework"
+import (
+	"github.com/orgming/mingdemo/framework/gin"
+	"github.com/orgming/mingdemo/provider/demo"
+)
 
-func SubjectAddController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectAddController")
-	return nil
+func SubjectAddController(c *gin.Context) {
+	c.ISetOkStatus().IJson("Ok, SubjectAddController")
 }
 
-func SubjectListController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectListController")
-	return nil
+// 对应路由 /subject/list/all
+func SubjectListController(c *gin.Context) {
+	//c.ISetOkStatus().IJson("Ok, SubjectListController")
+
+	// 获取Demo服务实例
+	demoService := c.MustMake(demo.Key).(demo.Service)
+	// 调用服务实例的方法
+	foo := demoService.GetFoo()
+
+	c.ISetOkStatus().IJson(foo)
 }
 
-func SubjectDeleteController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectDelController")
-	return nil
+func SubjectDeleteController(c *gin.Context) {
+	c.ISetOkStatus().IJson("Ok, SubjectDelController")
 }
 
-func SubjectUpdateController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectUpdateController")
-	return nil
+func SubjectUpdateController(c *gin.Context) {
+	c.ISetOkStatus().IJson("Ok, SubjectUpdateController")
 }
 
-func SubjectGetController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectGetController")
-	return nil
+func SubjectGetController(c *gin.Context) {
+	c.ISetOkStatus().IJson("Ok, SubjectGetController")
 }
 
-func SubjectNameController(c *framework.Context) error {
-	c.SetOkStatus().Json("Ok, SubjectNameController")
-	return nil
+func SubjectNameController(c *gin.Context) {
+	c.ISetOkStatus().IJson("Ok, SubjectNameController")
 }
