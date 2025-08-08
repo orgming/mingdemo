@@ -37,7 +37,7 @@ type MingContainer struct {
 	lock sync.RWMutex
 }
 
-func NewContainer() *MingContainer {
+func NewMingContainer() *MingContainer {
 	return &MingContainer{
 		providers: make(map[string]ServiceProvider),
 		instances: make(map[string]any),
