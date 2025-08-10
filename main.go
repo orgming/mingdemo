@@ -6,9 +6,11 @@ package main
 
 import (
 	"context"
+	mingHttp "github.com/orgming/mingdemo/app/http"
+	"github.com/orgming/mingdemo/app/provider/demo"
 	"github.com/orgming/mingdemo/framework/gin"
 	"github.com/orgming/mingdemo/framework/middleware"
-	"github.com/orgming/mingdemo/provider/demo"
+	"github.com/orgming/mingdemo/framework/provider/app"
 	"log"
 	"net/http"
 	"os"
@@ -20,12 +22,14 @@ func main() {
 	// 创建engine结构
 	core := gin.New()
 	// 绑定具体的服务
-	core.Bind(&demo.DemoServiceProvider{})
+	core.Bind(&app.MingAppProvider{})
+	core.Bind(&demo.DemoProvider{})
 
 	core.Use(gin.Recovery())
 	core.Use(middleware.Cost())
 
-	registerRouter(core)
+	mingHttp.Routes(core)
+
 	server := &http.Server{
 		// 使用自定义的请求核心处理函数
 		Handler: core,
