@@ -65,6 +65,7 @@ func NewMingApp(params ...any) (any, error) {
 	if len(params) != 2 {
 		return nil, errors.New("params must be 2")
 	}
+	// 两个参数一个是容器，一个是基础路径
 	container := params[0].(framework.Container)
 	baseFolder := params[1].(string)
 	return &MingApp{
