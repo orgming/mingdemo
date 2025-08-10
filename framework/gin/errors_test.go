@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/json"
+	"github.com/orgming/ming/framework/gin/internal/json"
 	"github.com/stretchr/testify/assert"
 )
 

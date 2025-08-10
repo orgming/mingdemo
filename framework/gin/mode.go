@@ -9,7 +9,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/orgming/mingdemo/framework/gin/binding"
+	"github.com/orgming/ming/framework/gin/binding"
 )
 
 // EnvGinMode indicates environment name for gin mode.

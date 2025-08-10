@@ -7,7 +7,7 @@ package gin
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/ming/framework"
 	"html/template"
 	"net"
 	"net/http"
@@ -17,8 +17,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
-	"github.com/orgming/mingdemo/framework/gin/render"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/render"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )

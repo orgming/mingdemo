@@ -6,7 +6,7 @@ package gin
 
 import (
 	"errors"
-	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/ming/framework"
 	"io"
 	"log"
 	"math"
@@ -21,8 +21,8 @@ import (
 	"time"
 
 	"github.com/gin-contrib/sse"
-	"github.com/orgming/mingdemo/framework/gin/binding"
-	"github.com/orgming/mingdemo/framework/gin/render"
+	"github.com/orgming/ming/framework/gin/binding"
+	"github.com/orgming/ming/framework/gin/render"
 )
 
 // Content-Type MIME of the most common data formats.

@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/orgming/mingdemo/framework/gin"
+	"github.com/orgming/ming/framework/gin"
 	"log"
 	"time"
 )

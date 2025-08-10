@@ -3,7 +3,7 @@ package middleware
 import (
 	"context"
 	"fmt"
-	"github.com/orgming/mingdemo/framework/gin"
+	"github.com/orgming/ming/framework/gin"
 	"log"
 	"time"
 )

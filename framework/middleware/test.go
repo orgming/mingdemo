@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/orgming/mingdemo/framework/gin"
+	"github.com/orgming/ming/framework/gin"
 )
 
 func Test1() gin.HandlerFunc {

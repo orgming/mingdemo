@@ -6,7 +6,7 @@ package gin
 
 import (
 	"context"
-	"github.com/orgming/mingdemo/framework"
+	"github.com/orgming/ming/framework"
 )
 
 func (c *Context) BaseContext() context.Context {

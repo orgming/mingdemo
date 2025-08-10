@@ -10,7 +10,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/json"
+	"github.com/orgming/ming/framework/gin/internal/json"
 )
 
 // EnableDecoderUseNumber is used to call the UseNumber method on the JSON

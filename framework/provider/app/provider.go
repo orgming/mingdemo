@@ -1,11 +1,11 @@
 package app
 
 import (
-	"github.com/orgming/mingdemo/framework"
-	"github.com/orgming/mingdemo/framework/contract"
+	"github.com/orgming/ming/framework"
+	"github.com/orgming/ming/framework/contract"
 )
 
-// MingAppProvider 提供App的具体实现方法
+// MingAppProvider ming框架默认的App服务提供者
 type MingAppProvider struct {
 	BaseFolder string
 }

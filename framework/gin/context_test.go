@@ -24,8 +24,8 @@ import (
 	"time"
 
 	"github.com/gin-contrib/sse"
-	"github.com/orgming/mingdemo/framework/gin/binding"
-	testdata "github.com/orgming/mingdemo/framework/gin/testdata/protoexample"
+	"github.com/orgming/ming/framework/gin/binding"
+	testdata "github.com/orgming/ming/framework/gin/testdata/protoexample"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
 )

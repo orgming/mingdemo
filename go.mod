@@ -1,4 +1,4 @@
-module github.com/orgming/mingdemo
+module github.com/orgming/ming
 
 go 1.24.2
 

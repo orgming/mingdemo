@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
 )
 
 // String contains the given interface object slice and its format.

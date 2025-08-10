@@ -11,7 +11,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
 )
 
 var (
