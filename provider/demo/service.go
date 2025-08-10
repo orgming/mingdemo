@@ -15,7 +15,7 @@ type DemoService struct {
 }
 
 // 初始化实例的方法
-func NewDemoService(params ...interface{}) (interface{}, error) {
+func NewDemoService(params ...any) (any, error) {
 	// 这里需要将参数展开
 	c := params[0].(framework.Container)
 
