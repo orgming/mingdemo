@@ -24,14 +24,15 @@ type Container interface {
 	// MakeNew 根据关键字凭证获取一个服务，只是这个服务并不是单例模式的
 	// 它是根据服务提供者注册的启动函数和传递的 params 参数实例化出来的
 	// 这个函数在需要为不同参数启动不同实例的时候非常有用
+	// 根据不同参数获取新的实例
 	MakeNew(key string, params []any) (any, error)
 }
 
 type MingContainer struct {
 	Container // 强制要求实现Container接口
-	// providers 存储注册的服务提供者，key 为字符串凭证
+	// providers 存储注册的服务提供者，key为字符串凭证
 	providers map[string]ServiceProvider
-	// instances 具体的实例
+	// instances 具体的服务实例
 	instances map[string]any
 	// lock 用于锁住对容器的变更操作
 	lock sync.RWMutex

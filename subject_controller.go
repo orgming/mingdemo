@@ -11,7 +11,6 @@ func SubjectAddController(c *gin.Context) {
 
 // 对应路由 /subject/list/all
 func SubjectListController(c *gin.Context) {
-	//c.ISetOkStatus().IJson("Ok, SubjectListController")
 
 	// 获取Demo服务实例
 	demoService := c.MustMake(demo.Key).(demo.Service)
