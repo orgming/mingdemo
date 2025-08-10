@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-// Container 是一个服务容器，提供绑定服务和获取服务的功能
+// Container 是一个服务容器，提供绑定服务提供者和获取服务实例的功能
 type Container interface {
 	// Bind 绑定一个服务提供者，如果关键字凭证已经存在，会进行替换操作，返回error
 	Bind(provider ServiceProvider) error
