@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/orgming/mingdemo/framework/gin"
+	"github.com/orgming/ming/framework/gin"
 )
 
 var once sync.Once

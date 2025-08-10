@@ -1,6 +1,6 @@
 package demo
 
-import demoService "github.com/orgming/mingdemo/app/provider/demo"
+import demoService "github.com/orgming/ming/app/provider/demo"
 
 func UserModelsToUserDTOs(models []UserModel) []UserDTO {
 	ret := []UserDTO{}

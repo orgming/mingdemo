@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
-	"github.com/orgming/mingdemo/framework/gin/internal/json"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/internal/json"
 )
 
 var (

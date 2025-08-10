@@ -9,7 +9,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/orgming/mingdemo/framework/gin/binding"
+	"github.com/orgming/ming/framework/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 

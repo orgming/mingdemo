@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
 )
 
 // AuthUserKey is the cookie name for user credential in basic auth.

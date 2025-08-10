@@ -10,8 +10,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/orgming/mingdemo/framework/gin/internal/bytesconv"
-	"github.com/orgming/mingdemo/framework/gin/internal/json"
+	"github.com/orgming/ming/framework/gin/internal/bytesconv"
+	"github.com/orgming/ming/framework/gin/internal/json"
 )
 
 // JSON contains the given interface object.

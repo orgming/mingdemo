@@ -3,8 +3,8 @@ package app
 import (
 	"errors"
 	"flag"
-	"github.com/orgming/mingdemo/framework"
-	"github.com/orgming/mingdemo/framework/util"
+	"github.com/orgming/ming/framework"
+	"github.com/orgming/ming/framework/util"
 	"path/filepath"
 )
 

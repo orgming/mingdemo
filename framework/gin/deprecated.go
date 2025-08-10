@@ -7,7 +7,7 @@ package gin
 import (
 	"log"
 
-	"github.com/orgming/mingdemo/framework/gin/binding"
+	"github.com/orgming/ming/framework/gin/binding"
 )
 
 // BindWith binds the passed struct pointer using the specified binding engine.

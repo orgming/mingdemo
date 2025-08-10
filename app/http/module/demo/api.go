@@ -1,9 +1,9 @@
 package demo
 
 import (
-	demoService "github.com/orgming/mingdemo/app/provider/demo"
-	"github.com/orgming/mingdemo/framework/contract"
-	"github.com/orgming/mingdemo/framework/gin"
+	demoService "github.com/orgming/ming/app/provider/demo"
+	"github.com/orgming/ming/framework/contract"
+	"github.com/orgming/ming/framework/gin"
 )
 
 type DemoApi struct {

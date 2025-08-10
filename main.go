@@ -6,11 +6,11 @@ package main
 
 import (
 	"context"
-	mingHttp "github.com/orgming/mingdemo/app/http"
-	"github.com/orgming/mingdemo/app/provider/demo"
-	"github.com/orgming/mingdemo/framework/gin"
-	"github.com/orgming/mingdemo/framework/middleware"
-	"github.com/orgming/mingdemo/framework/provider/app"
+	mingHttp "github.com/orgming/ming/app/http"
+	"github.com/orgming/ming/app/provider/demo"
+	"github.com/orgming/ming/framework/gin"
+	"github.com/orgming/ming/framework/middleware"
+	"github.com/orgming/ming/framework/provider/app"
 	"log"
 	"net/http"
 	"os"

@@ -1,6 +1,6 @@
 package demo
 
-import "github.com/orgming/mingdemo/framework"
+import "github.com/orgming/ming/framework"
 
 type Service struct {
 	container framework.Container
