@@ -8,8 +8,8 @@ package main
 import (
 	"log"
 
-	"github.com/orgming/ming/framework/cobra"
-	"github.com/orgming/ming/framework/cobra/doc"
+	"github.com/spf13/cobra"
+	"github.com/spf13/cobra/doc"
 )
 
 func main() {
@@ -35,17 +35,17 @@ package main
 
 import (
 	"log"
-	"io"
+	"io/ioutil"
 	"os"
 
 	"k8s.io/kubernetes/pkg/kubectl/cmd"
 	cmdutil "k8s.io/kubernetes/pkg/kubectl/cmd/util"
 
-	"github.com/orgming/ming/framework/cobra/doc"
+	"github.com/spf13/cobra/doc"
 )
 
 func main() {
-	kubectl := cmd.NewKubectlCommand(cmdutil.NewFactory(nil), os.Stdin, io.Discard, io.Discard)
+	kubectl := cmd.NewKubectlCommand(cmdutil.NewFactory(nil), os.Stdin, ioutil.Discard, ioutil.Discard)
 	err := doc.GenReSTTree(kubectl, "./")
 	if err != nil {
 		log.Fatal(err)

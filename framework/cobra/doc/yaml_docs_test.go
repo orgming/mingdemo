@@ -17,6 +17,7 @@ package doc
 import (
 	"bytes"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -57,7 +58,7 @@ func TestGenYamlNoTag(t *testing.T) {
 func TestGenYamlTree(t *testing.T) {
 	c := &cobra.Command{Use: "do [OPTIONS] arg1 arg2"}
 
-	tmpdir, err := os.MkdirTemp("", "test-gen-yaml-tree")
+	tmpdir, err := ioutil.TempDir("", "test-gen-yaml-tree")
 	if err != nil {
 		t.Fatalf("Failed to create tmpdir: %s", err.Error())
 	}
@@ -84,7 +85,7 @@ func TestGenYamlDocRunnable(t *testing.T) {
 }
 
 func BenchmarkGenYamlToFile(b *testing.B) {
-	file, err := os.CreateTemp("", "")
+	file, err := ioutil.TempFile("", "")
 	if err != nil {
 		b.Fatal(err)
 	}
