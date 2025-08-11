@@ -5,50 +5,28 @@
 package main
 
 import (
-	"context"
-	mingHttp "github.com/orgming/ming/app/http"
-	"github.com/orgming/ming/app/provider/demo"
-	"github.com/orgming/ming/framework/gin"
-	"github.com/orgming/ming/framework/middleware"
+	"github.com/orgming/ming/app/console"
+	"github.com/orgming/ming/app/http"
+	"github.com/orgming/ming/framework"
 	"github.com/orgming/ming/framework/provider/app"
-	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
+	"github.com/orgming/ming/framework/provider/kernel"
 )
 
 func main() {
-	// 创建engine结构
-	core := gin.New()
-	// 绑定具体的服务
-	core.Bind(&app.MingAppProvider{})
-	core.Bind(&demo.DemoProvider{})
+	// 初始化服务容器
+	container := framework.NewMingContainer()
 
-	core.Use(gin.Recovery())
-	core.Use(middleware.Cost())
+	// 绑定APP服务提供者
+	container.Bind(&app.MingAppProvider{})
 
-	mingHttp.Routes(core)
-
-	server := &http.Server{
-		// 使用自定义的请求核心处理函数
-		Handler: core,
-		Addr:    ":8888",
+	// 将HTTP引擎初始化,并且作为服务提供者绑定到服务容器中
+	if engine, err := http.NewHttpEngine(); err == nil {
+		container.Bind(&kernel.MingKernelProvider{
+			HttpEngine: engine,
+		})
 	}
 
-	// 这个 Goroutine 是启动服务的 Goroutine
-	go func() {
-		server.ListenAndServe()
-	}()
+	//
+	console.RunCommand(container)
 
-	// 当前的 Goroutine 等待信号量
-	quit := make(chan os.Signal)
-	//  监控信号：SIGINT, SIGTERM, SIGQUIT
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
-	// 这里会阻塞当前 Goroutine 等待信号
-	<-quit
-
-	if err := server.Shutdown(context.Background()); err != nil {
-		log.Fatal("Server Shutdown:", err)
-	}
 }

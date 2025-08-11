@@ -6,21 +6,10 @@ package gin
 
 import (
 	"context"
-	"github.com/orgming/ming/framework"
 )
 
 func (c *Context) BaseContext() context.Context {
 	return c.Request.Context()
-}
-
-// engine 实现 container 的绑定封装
-
-func (engine *Engine) Bind(provider framework.ServiceProvider) error {
-	return engine.container.Bind(provider)
-}
-
-func (engine *Engine) IsBind(key string) bool {
-	return engine.container.IsBind(key)
 }
 
 // context 实现 container 的几个封装
