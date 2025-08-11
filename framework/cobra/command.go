@@ -22,6 +22,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/orgming/ming/framework"
+	"github.com/robfig/cron/v3"
 	"io"
 	"os"
 	"path/filepath"
@@ -50,6 +51,10 @@ type Group struct {
 // you to define the usage and description as part of your command
 // definition to ensure usability.
 type Command struct {
+	Cron *cron.Cron
+	// 对应Cron命令的信息
+	CronSpecs []CronSpec
+
 	// 服务容器
 	container framework.Container
 
