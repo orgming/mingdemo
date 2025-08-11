@@ -8,4 +8,5 @@ func AddKernelCommands(root *cobra.Command) {
 
 	root.AddCommand(initAppCmd())
 	root.AddCommand(initCronCmd())
+	root.AddCommand(initEnvCmd())
 }
