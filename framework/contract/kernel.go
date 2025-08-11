@@ -5,7 +5,7 @@ import "net/http"
 // 把创建 Engine 的过程封装为一个服务接口协议
 
 // KernelKey 提供kernel服务凭证
-const KernelKey = "ming:k"
+const KernelKey = "ming:kernel"
 
 // Kernel 接口提供框架最核心的结构
 type Kernel interface {
