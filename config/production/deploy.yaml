@@ -1,0 +1,11 @@
+host: 127.0.0.1
+user: andyron
+password: 123abc
+rsa_key:
+timeout: 1000
+remote_path: "/home/andyron/"
+post_shell:
+  - "./ming serve restart"
+  - "pwd"
+goos: linux
+goarch: amd64
