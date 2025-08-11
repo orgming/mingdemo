@@ -3,6 +3,7 @@ package app
 import (
 	"errors"
 	"flag"
+	"github.com/google/uuid"
 	"github.com/orgming/ming/framework"
 	"github.com/orgming/ming/framework/util"
 	"path/filepath"
@@ -12,6 +13,7 @@ import (
 type MingApp struct {
 	container  framework.Container // 服务容器
 	baseFolder string              // 基础路径
+	appID      string
 }
 
 func (m MingApp) Version() string {
@@ -68,8 +70,10 @@ func NewMingApp(params ...any) (any, error) {
 	// 两个参数一个是容器，一个是基础路径
 	container := params[0].(framework.Container)
 	baseFolder := params[1].(string)
+	appID := uuid.New().String()
 	return &MingApp{
 		container:  container,
 		baseFolder: baseFolder,
+		appID:      appID,
 	}, nil
 }

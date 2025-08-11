@@ -5,6 +5,8 @@ const AppKey = "ming:app"
 
 // App 应用目录服务接口
 type App interface {
+	// AppID 表示当前这个app的唯一id, 可以用于分布式锁等
+	AppID() string
 	// Version 当前版本
 	Version() string
 	// BaseFolder 应用根目录
