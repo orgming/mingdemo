@@ -17,6 +17,7 @@ func Register(r *gin.Engine) error {
 	r.GET("/demo/demo", api.Demo)
 	r.GET("/demo/demo2", api.Demo2)
 	r.POST("/demo/demo3", api.DemoPost)
+	r.GET("/demo/demo4", api.Demo4)
 
 	return nil
 }
@@ -58,4 +59,10 @@ func (api *DemoApi) DemoPost(c *gin.Context) {
 		c.AbortWithError(500, err)
 	}
 	c.JSON(200, nil)
+}
+
+func (api *DemoApi) Demo4(c *gin.Context) {
+	configService := c.MustMake(contract.ConfigKey).(contract.Config)
+	password := configService.GetString("database.mysql.password")
+	c.JSON(200, password)
 }
