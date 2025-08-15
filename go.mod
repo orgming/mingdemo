@@ -14,7 +14,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.2
 	github.com/spf13/cast v1.9.2
 	github.com/spf13/pflag v1.0.6
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/ugorji/go/codec v1.2.12
 	golang.org/x/net v0.25.0
 	google.golang.org/protobuf v1.34.1
@@ -36,6 +36,8 @@ require (
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
+	github.com/lestrrat-go/strftime v1.1.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
