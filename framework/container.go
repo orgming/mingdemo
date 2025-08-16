@@ -151,3 +151,13 @@ func (mc *MingContainer) newInstance(sp ServiceProvider, params []any) (any, err
 	}
 	return ins, err
 }
+
+// NameList 列出容器中所有服务提供者的字符串凭证
+func (mc *MingContainer) NameList() []string {
+	ret := []string{}
+	for _, provider := range mc.providers {
+		name := provider.Name()
+		ret = append(ret, name)
+	}
+	return ret
+}
