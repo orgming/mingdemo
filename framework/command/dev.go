@@ -139,7 +139,6 @@ func (p *Proxy) rebuildBackend() error {
 
 // 启动后端服务
 func (p *Proxy) restartBackend() error {
-
 	// 杀死之前的进程
 	if p.backendPid != 0 {
 		syscall.Kill(p.backendPid, syscall.SIGKILL)

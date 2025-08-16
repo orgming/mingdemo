@@ -12,7 +12,12 @@ import (
 	"time"
 )
 
+// app启动地址 类似localhost:8888 或者 :8888
+var appAddress = ""
+
 func initAppCmd() *cobra.Command {
+	appStartCmd.Flags().StringVar(&appAddress, "address", ":8888", "设置app启动的地址，默认为：8888")
+
 	appCmd.AddCommand(appStartCmd)
 	return appCmd
 }
@@ -40,7 +45,7 @@ var appStartCmd = &cobra.Command{
 		engine := kernelService.HttpEngine()
 
 		server := &http.Server{
-			Addr:    ":8888",
+			Addr:    appAddress,
 			Handler: engine,
 		}
 
