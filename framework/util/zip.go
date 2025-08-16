@@ -9,8 +9,7 @@ import (
 	"strings"
 )
 
-// Unzip will decompress a zip archive, moving all files and folders
-// within the zip file (parameter 1) to an output directory (parameter 2).
+// Unzip 压缩zip文件，复制文件和目录都到目标目录中
 func Unzip(src string, dest string) ([]string, error) {
 
 	var filenames []string

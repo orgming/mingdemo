@@ -2,7 +2,6 @@ package util
 
 import (
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -28,7 +27,7 @@ func IsHiddenDirectory(path string) bool {
 
 // SubDir 输出所有子目录，目录名
 func SubDir(folder string) ([]string, error) {
-	subs, err := ioutil.ReadDir(folder)
+	subs, err := os.ReadDir(folder)
 	if err != nil {
 		return nil, err
 	}
@@ -42,6 +41,7 @@ func SubDir(folder string) ([]string, error) {
 	return ret, nil
 }
 
+// DownloadFile 下载url中的内容保存到本地的filepath中
 func DownloadFile(filepath string, url string) error {
 
 	// Get the data
