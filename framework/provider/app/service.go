@@ -131,3 +131,10 @@ func (app *MingApp) LoadAppConfig(kv map[string]string) {
 		app.configMap[key] = val
 	}
 }
+
+func (app *MingApp) AppFolder() string {
+	if val, ok := app.configMap["app_folder"]; ok {
+		return val
+	}
+	return filepath.Join(app.BaseFolder(), "app")
+}

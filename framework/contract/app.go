@@ -28,4 +28,7 @@ type App interface {
 
 	// LoadAppConfig 加载新的AppConfig，key为对应的函数转为小写下划线，比如ConfigFolder => config_folder
 	LoadAppConfig(kv map[string]string)
+
+	// AppFolder 定义业务代码所在的目录，用于监控文件变更使用
+	AppFolder() string
 }
