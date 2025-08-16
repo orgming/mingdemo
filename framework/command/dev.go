@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/orgming/ming/framework"
+	"github.com/orgming/ming/framework/cobra"
 	"github.com/orgming/ming/framework/contract"
 	"github.com/orgming/ming/framework/util"
 	"net/http"
@@ -292,4 +293,60 @@ func (p *Proxy) monitorBackend() error {
 		}
 	}
 	return nil
+}
+
+// 初始化调试命令
+func initDevCmd() *cobra.Command {
+	devCmd.AddCommand(devBackendCmd)
+	devCmd.AddCommand(devFrontendCmd)
+	devCmd.AddCommand(devAllCmd)
+	return devCmd
+}
+
+// 为调试模式的一级命令
+var devCmd = &cobra.Command{
+	Use:   "dev",
+	Short: "调试模式",
+	RunE: func(c *cobra.Command, args []string) error {
+		c.Help()
+		return nil
+	},
+}
+
+// 启动后端调试模式
+var devBackendCmd = &cobra.Command{
+	Use:   "backend",
+	Short: "启动后端调试模式",
+	RunE: func(c *cobra.Command, args []string) error {
+		proxy := NewProxy(c.GetContainer())
+		go proxy.monitorBackend()
+		if err := proxy.startProxy(false, true); err != nil {
+			return err
+		}
+		return nil
+	},
+}
+
+// 启动前端调试模式
+var devFrontendCmd = &cobra.Command{
+	Use:   "frontend",
+	Short: "前端调试模式",
+	RunE: func(c *cobra.Command, args []string) error {
+		proxy := NewProxy(c.GetContainer())
+		return proxy.startProxy(true, false)
+
+	},
+}
+
+var devAllCmd = &cobra.Command{
+	Use:   "all",
+	Short: "同时启动前端和后端调试",
+	RunE: func(c *cobra.Command, args []string) error {
+		proxy := NewProxy(c.GetContainer())
+		go proxy.monitorBackend()
+		if err := proxy.startProxy(true, true); err != nil {
+			return err
+		}
+		return nil
+	},
 }
