@@ -9,11 +9,13 @@ import (
 	"github.com/orgming/ming/app/http"
 	"github.com/orgming/ming/framework"
 	"github.com/orgming/ming/framework/provider/app"
+	"github.com/orgming/ming/framework/provider/cache"
 	"github.com/orgming/ming/framework/provider/config"
 	"github.com/orgming/ming/framework/provider/distributed"
 	"github.com/orgming/ming/framework/provider/env"
 	"github.com/orgming/ming/framework/provider/kernel"
 	"github.com/orgming/ming/framework/provider/orm"
+	"github.com/orgming/ming/framework/provider/redis"
 )
 
 func main() {
@@ -27,6 +29,8 @@ func main() {
 	container.Bind(&distributed.LocalDistributedProvider{})
 	container.Bind(&config.MingConfigProvider{})
 	container.Bind(&orm.GormProvider{})
+	container.Bind(&redis.RedisProvider{})
+	container.Bind(&cache.MingCacheProvider{})
 
 	// 将HTTP引擎初始化,并且作为服务提供者绑定到服务容器中
 	if engine, err := http.NewHttpEngine(); err == nil {
