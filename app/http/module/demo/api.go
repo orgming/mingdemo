@@ -19,6 +19,8 @@ func Register(r *gin.Engine) error {
 	r.POST("/demo/demo3", api.DemoPost)
 	r.GET("/demo/demo4", api.Demo4)
 
+	r.GET("/demo/orm", api.DemoOrm)
+
 	return nil
 }
 
