@@ -31,4 +31,7 @@ type App interface {
 
 	// AppFolder 定义业务代码所在的目录，用于监控文件变更使用
 	AppFolder() string
+
+	// DeployFolder 存放部署的时候创建的文件夹
+	DeployFolder() string
 }

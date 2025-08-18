@@ -138,3 +138,10 @@ func (app *MingApp) AppFolder() string {
 	}
 	return filepath.Join(app.BaseFolder(), "app")
 }
+
+func (app MingApp) DeployFolder() string {
+	if val, ok := app.configMap["deploy_folder"]; ok {
+		return val
+	}
+	return filepath.Join(app.BaseFolder(), "deploy")
+}
